@@ -1,17 +1,536 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Australia Graduate Outcomes</title>
-
- 
-  <!-- Import Vega & Vega-Lite  -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>After the Degree | Australian Graduate Outcomes</title>
+  <meta name="description" content="An evidence-led visual story about graduate employment, salary and further study in Australia.">
+  <link rel="stylesheet" href="css/styles.css">
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
 </head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">AUSTRALIAN GRADUATE OUTCOMES · 2025</div>
+    <h1>After the <em>degree.</em></h1>
+    <p class="dek">
+      A degree is a beginning, not a single destination. Explore how employment,
+      salary and further study differ across fields — and place those outcomes
+      in the wider Australian labour market.
+    </p>
+    <div class="hero-meta">
+      <span>DATA STORY</span>
+      <span>QILT + ABS</span>
+      <span>2024–2026</span>
+    </div>
+  </header>
 
-<body> <h1> test </h1> </body>
+  <main>
+    <section class="intro section-grid">
+      <div>
+        <p class="section-kicker">THE QUESTION</p>
+        <h2>What happens after university?</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Graduate outcomes are often reduced to one number. But full-time
+          employment, overall employment, salary and further study tell different
+          parts of the story. This page compares outcomes across fields and years,
+          then uses the broader labour market as context.
+        </p>
+        <p class="caveat">
+          <strong>Important:</strong> the QILT figures are graduate outcomes.
+          The ABS maps show the general state and territory labour market; they
+          are not maps of graduate outcomes.
+        </p>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="section-heading">
+        <span class="section-number">01</span>
+        <div>
+          <p class="section-kicker">THE WIDER LANDSCAPE</p>
+          <h2>Opportunity has a geography</h2>
+          <p class="section-lede">
+            The maps describe the wider labour market, not graduate-specific employment.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Unemployment differs across states</h3>
+            <p>ABS trend estimates, September 2026. Choropleth colour shows the rate.</p>
+          </div>
+          <div id="c1" class="chart"></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-copy">
+            <h3>Where employed people are concentrated</h3>
+            <p>
+              Circle size represents the number employed; locations are
+              approximate state/territory centroids.
+            </p>
+          </div>
+          <div id="chart-02" class="chart"></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-copy">
+            <h3>The same data, a different geography</h3>
+            <p>
+              Tile grid gives every state/territory similar visual space;
+              positions are schematic.
+            </p>
+          </div>
+          <div id="chart-03" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="section-heading">
+        <span class="section-number">02</span>
+        <div>
+          <p class="section-kicker">DIFFERENT DESTINATIONS</p>
+          <h2>Not every field starts from the same place</h2>
+          <p class="section-lede">
+            Full-time employment is one useful measure — but changes and further study matter too.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Most fields improved — but not all</h3>
+            <p>Compare full-time employment rates for 2024 and 2025.</p>
+          </div>
+          <div id="chart-04" class="chart"></div>
+        </article>
+
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>The employment picture is not uniform</h3>
+            <p>Compare three employment-related measures across fields.</p>
+          </div>
+          <div id="chart-05" class="chart"></div>
+        </article>
+
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Further study is another destination</h3>
+            <p>Share in full-time study in 2025 by broad field of education.</p>
+          </div>
+          <div id="chart-06" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="section-heading">
+        <span class="section-number">03</span>
+        <div>
+          <p class="section-kicker">THE SALARY DIVIDE</p>
+          <h2>Employment is not the whole story</h2>
+          <p class="section-lede">
+            Salary adds another dimension, but should not be treated as the sole
+            measure of a degree's value.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>The salary ladder</h3>
+            <p>Median annual full-time salary by field in 2025.</p>
+          </div>
+          <div id="chart-07" class="chart"></div>
+        </article>
+
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Higher employment does not automatically mean higher pay</h3>
+            <p>Each point is a field. Association is not causation.</p>
+          </div>
+          <div id="chart-08" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="section-heading">
+        <span class="section-number">04</span>
+        <div>
+          <p class="section-kicker">CHANGE OVER TIME</p>
+          <h2>Rankings and outcomes can move</h2>
+          <p class="section-lede">
+            Two years show short-term shifts; the workbook also includes survey-round totals for 2023–2025.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Salary shifts from 2024 to 2025</h3>
+            <p>Follow fields across the two salary observations.</p>
+          </div>
+          <div id="chart-09" class="chart"></div>
+        </article>
+
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Salary rankings move as well</h3>
+            <p>Rankings are relative positions and hide the size of differences.</p>
+          </div>
+          <div id="chart-10" class="chart"></div>
+        </article>
+
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>The broader early-career picture</h3>
+            <p>Survey-round totals; not a perfectly continuous annual time series.</p>
+          </div>
+          <div id="chart-11" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="section-heading">
+        <span class="section-number">05</span>
+        <div>
+          <p class="section-kicker">WHAT THE AVERAGES HIDE</p>
+          <h2>There is no single measure of graduate success</h2>
+          <p class="section-lede">
+            Qualification level and provider type also matter. Compare like with like.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-grid">
+        <article class="chart-card wide">
+          <div class="chart-copy">
+            <h3>Qualification and provider type change the picture</h3>
+            <p>2025 outcomes by qualification and provider type; not institution rankings.</p>
+          </div>
+          <div id="chart-12" class="chart"></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="conclusion">
+      <div class="takeaway">
+        <p class="section-kicker">THE TAKEAWAY</p>
+        <p>
+          Graduate outcomes are multidimensional. Employment, salary and further
+          study reveal different aspects of the transition from university to work.
+          The useful question is not simply which field is “best”, but which
+          outcomes matter, for whom, and at what point after graduation.
+        </p>
+      </div>
+    </section>
+
+    <section class="sources">
+      <h2>Sources, definitions &amp; limitations</h2>
+
+      <div class="source-grid">
+        <div>
+          <h3>QILT — Graduate Outcomes Survey</h3>
+          <p>
+            Supplied QILT 2025 National Report Tables workbook: undergraduate
+            employment and salary by study area, further study by broad field,
+            and survey-round totals.
+          </p>
+          <a href="https://qilt.edu.au/surveys/graduate-outcomes-survey-(gos)"
+             target="_blank" rel="noopener">
+            QILT GOS reports and data ↗
+          </a>
+        </div>
+
+        <div>
+          <h3>Australian Bureau of Statistics</h3>
+          <p>
+            Labour Force, Australia, September 2026. State/territory trend
+            estimates are context only, not graduate-specific.
+          </p>
+          <a href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/sep-2026"
+             target="_blank" rel="noopener">
+            ABS September 2026 release ↗
+          </a>
+        </div>
+
+        <div>
+          <h3>Geographic boundaries</h3>
+          <p>
+            Australian state boundary GeoJSON loaded from a public GitHub
+            repository. Internet access is required for boundary and Vega libraries.
+          </p>
+          <a href="https://github.com/rowanhogan/australian-states"
+             target="_blank" rel="noopener">
+            Boundary source ↗
+          </a>
+        </div>
+      </div>
+
+      <p class="smallprint">
+        Prepared for FIT3179 Data Visualisation 2. Author: [Your name].
+        Last updated: October 2026. Verify chart definitions against the original
+        QILT tables and acknowledge AI use according to unit instructions.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <span>AFTER THE DEGREE</span>
+    <span>Evidence, not rankings.</span>
+  </footer>
+
+  <script>
+    const opts = { actions: false, renderer: 'svg'};
+
+    const charts = {
+      c1: 'c1_international_students_flow_map',
+    };
+
+    for (const [id, file] of Object.entries(charts)) {
+      vegaEmbed('#' + id, 'js/' + file + '.vg.json', opts).catch(err => console.error(id,err));
+    }
+
+  </script>
+</body>
 </html>
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Global Student Flows to Australia",
+    "subtitle": "Flow paths representing total international enrolments (Continuing + New Students) by country of origin",
+    "fontSize": 18,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 850,
+  "height": 480,
+  "projection": {
+    "type": "equalEarth",
+    "rotate": [-150, 0, 0]
+  },
+  "params": [
+    {
+      "name": "min_students",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000,
+        "step": 5000,
+        "name": "Min Total Students: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {"sphere": true},
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f0f6fc",
+        "stroke": "#cbd5e1",
+        "strokeWidth": 0.8
+      }
+    },
+    {
+      "data": {"graticule": true},
+      "mark": {
+        "type": "geoshape",
+        "stroke": "#e2e8f0",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/vega/vega-datasets/next/data/world-110m.json",
+        "format": {"type": "topojson", "feature": "countries"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e2e8f0",
+        "stroke": "#ffffff",
+        "strokeWidth": 0.6
+      }
+    },
+    {
+      "data": {
+        "url": "data/international_students_flow.csv",
+        "format": {
+          "type": "csv",
+          "parse": {
+            "Total_students": "number",
+            "Continuing_students": "number",
+            "New_students": "number",
+            "Percent_new": "number",
+            "origin_lat": "number",
+            "origin_lon": "number",
+            "dest_lat": "number",
+            "dest_lon": "number"
+          }
+        }
+      },
+      "transform": [
+        {"filter": "datum.Total_students >= min_students"}
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "strokeCap": "round"
+          },
+          "encoding": {
+            "longitude": {"field": "origin_lon", "type": "quantitative"},
+            "latitude": {"field": "origin_lat", "type": "quantitative"},
+            "longitude2": {"field": "dest_lon"},
+            "latitude2": {"field": "dest_lat"},
+            "strokeWidth": {
+              "field": "Total_students",
+              "type": "quantitative",
+              "scale": {"domain": [4000, 180000], "range": [1, 7]},
+              "legend": {"title": "Flow Volume (Students)", "format": ",d"}
+            },
+            "color": {
+              "field": "Total_students",
+              "type": "quantitative",
+              "scale": {
+                "type": "log",
+                "scheme": "blues"
+              },
+              "legend": null
+            },
+            "opacity": {
+              "condition": {"param": "highlight", "empty": false, "value": 0.95},
+              "value": 0.35
+            },
+            "tooltip": [
+              {"field": "Country", "type": "nominal", "title": "Source Country"},
+              {"field": "Total_students", "type": "quantitative", "title": "Total Students", "format": ",d"},
+              {"field": "Continuing_students", "type": "quantitative", "title": "Continuing Students", "format": ",d"},
+              {"field": "New_students", "type": "quantitative", "title": "New Commencements", "format": ",d"},
+              {"field": "Percent_new", "type": "quantitative", "title": "New Students (%)", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "mark": {
+            "type": "circle",
+            "stroke": "#ffffff",
+            "strokeWidth": 1.2,
+            "cursor": "pointer"
+          },
+          "params": [
+            {
+              "name": "highlight",
+              "select": {
+                "type": "point",
+                "on": "pointerover",
+                "clear": "pointerout",
+                "fields": ["Country"]
+              }
+            }
+          ],
+          "encoding": {
+            "longitude": {"field": "origin_lon", "type": "quantitative"},
+            "latitude": {"field": "origin_lat", "type": "quantitative"},
+            "size": {
+              "field": "Total_students",
+              "type": "quantitative",
+              "scale": {"domain": [4000, 180000], "range": [40, 500]},
+              "legend": null
+            },
+            "color": {
+              "field": "Total_students",
+              "type": "quantitative",
+              "scale": {"type": "log", "scheme": "blues"}
+            },
+            "opacity": {
+              "condition": {"param": "highlight", "empty": false, "value": 1.0},
+              "value": 0.85
+            },
+            "tooltip": [
+              {"field": "Country", "type": "nominal", "title": "Source Country"},
+              {"field": "Total_students", "type": "quantitative", "title": "Total Students", "format": ",d"},
+              {"field": "Continuing_students", "type": "quantitative", "title": "Continuing Students", "format": ",d"},
+              {"field": "New_students", "type": "quantitative", "title": "New Commencements", "format": ",d"},
+              {"field": "Percent_new", "type": "quantitative", "title": "New Students (%)", "format": ".1f"}
+            ]
+          }
+        },
+        {
+          "transform": [
+            {"filter": "datum.Total_students >= 60000"}
+          ],
+          "mark": {
+            "type": "text",
+            "dx": 0,
+            "dy": -13,
+            "fontSize": 10.5,
+            "fontWeight": "bold",
+            "fill": "#0f172a"
+          },
+          "encoding": {
+            "longitude": {"field": "origin_lon", "type": "quantitative"},
+            "latitude": {"field": "origin_lat", "type": "quantitative"},
+            "text": {"field": "Country", "type": "nominal"}
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {"name": "Australia", "lat": -35.28, "lon": 149.13}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "circle",
+            "size": 180,
+            "color": "#e11d48",
+            "stroke": "#ffffff",
+            "strokeWidth": 2
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "tooltip": [{"field": "name", "type": "nominal", "title": "Destination"}]
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "text": "Australia (Destination)",
+            "dx": 12,
+            "dy": 15,
+            "fontSize": 11,
+            "fontWeight": "bold",
+            "fill": "#9f1239"
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}
