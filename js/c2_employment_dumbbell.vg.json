@@ -1,0 +1,149 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Full-Time Employment Rates: Overseas vs. In Australia",
+    "subtitle": "International postgraduate coursework graduates consistently secure higher full-time employment overseas (2018–2025)",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 650,
+  "height": 380,
+  "data": {
+    "values": [
+      {"year": "2018", "in_aus": 46.2, "overseas": 74.5, "domestic": 86.9, "gap": 28.3},
+      {"year": "2019", "in_aus": 43.5, "overseas": 69.7, "domestic": 86.8, "gap": 26.2},
+      {"year": "2020", "in_aus": 39.2, "overseas": 64.2, "domestic": 85.6, "gap": 25.0},
+      {"year": "2021", "in_aus": 41.4, "overseas": 62.0, "domestic": 84.9, "gap": 20.6},
+      {"year": "2022", "in_aus": 58.5, "overseas": 66.1, "domestic": 89.4, "gap": 7.6},
+      {"year": "2023", "in_aus": 60.8, "overseas": 65.0, "domestic": 90.3, "gap": 4.2},
+      {"year": "2024", "in_aus": 55.6, "overseas": 60.1, "domestic": 88.1, "gap": 4.5},
+      {"year": "2025", "in_aus": 52.2, "overseas": 60.2, "domestic": 88.3, "gap": 8.0}
+    ]
+  },
+  "encoding": {
+    "y": {
+      "field": "year",
+      "type": "ordinal",
+      "title": null,
+      "sort": "descending",
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontSize": 12,
+        "labelFontWeight": "bold"
+      }
+    }
+  },
+  "layer": [
+    {
+      "description": "Connecting line segment between In Australia and Overseas",
+      "mark": {
+        "type": "rule",
+        "color": "#cbd5e1",
+        "strokeWidth": 4,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "x": {"field": "in_aus", "type": "quantitative"},
+        "x2": {"field": "overseas"}
+      }
+    },
+    {
+      "description": "In Australia Point",
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "color": "#ef4444",
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "in_aus",
+          "type": "quantitative",
+          "title": "Proportion Employed Full-Time (%)",
+          "scale": {"domain": [30, 95]},
+          "axis": {"grid": true, "gridColor": "#f1f5f9", "format": ".0f"}
+        },
+        "tooltip": [
+          {"field": "year", "title": "Survey Year"},
+          {"field": "in_aus", "title": "In Australia (%)", "format": ".1f"},
+          {"field": "overseas", "title": "Overseas (%)", "format": ".1f"},
+          {"field": "gap", "title": "Overseas Advantage (% pts)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "description": "Overseas Point",
+      "mark": {
+        "type": "circle",
+        "size": 130,
+        "color": "#059669",
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {"field": "overseas", "type": "quantitative"},
+        "tooltip": [
+          {"field": "year", "title": "Survey Year"},
+          {"field": "overseas", "title": "Overseas (%)", "format": ".1f"},
+          {"field": "in_aus", "title": "In Australia (%)", "format": ".1f"},
+          {"field": "gap", "title": "Overseas Advantage (% pts)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "description": "Domestic Benchmark Point",
+      "mark": {
+        "type": "tick",
+        "color": "#64748b",
+        "thickness": 2,
+        "size": 16
+      },
+      "encoding": {
+        "x": {"field": "domestic", "type": "quantitative"},
+        "tooltip": [
+          {"field": "year", "title": "Survey Year"},
+          {"field": "domestic", "title": "Domestic Benchmark (%)", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "description": "Annotation on Peak Disparity (2018)",
+      "transform": [{"filter": "datum.year === '2018'"}],
+      "mark": {
+        "type": "text",
+        "text": "+28.3% gap",
+        "dx": 0,
+        "dy": -13,
+        "fontSize": 10.5,
+        "fontWeight": "bold",
+        "color": "#047857"
+      },
+      "encoding": {
+        "x": {"datum": 60.3}
+      }
+    },
+    {
+      "description": "Annotation for 2025",
+      "transform": [{"filter": "datum.year === '2025'"}],
+      "mark": {
+        "type": "text",
+        "text": "+8.0% gap",
+        "dx": 0,
+        "dy": -13,
+        "fontSize": 10.5,
+        "fontWeight": "bold",
+        "color": "#047857"
+      },
+      "encoding": {
+        "x": {"datum": 56.2}
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}

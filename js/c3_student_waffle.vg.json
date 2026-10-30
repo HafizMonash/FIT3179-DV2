@@ -1,0 +1,113 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Composition of Australia's Higher Education Student Body (2024)",
+    "subtitle": "Each icon represents 1% of the total cohort (~15,686 students). 31% are onshore international enrolments.",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 420,
+  "height": 420,
+  "data": {
+    "url": "data/waffle.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "row": "number",
+        "col": "number",
+        "total_students": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "highlight_cohort",
+      "select": {
+        "type": "point",
+        "fields": ["category"],
+        "on": "pointerover",
+        "clear": "pointerout"
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {"padding": 0.2}
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "sort": "ascending",
+      "scale": {"padding": 0.2}
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 800,
+        "cursor": "pointer",
+        "shape": "M 0,-0.92 L 0.85,-0.55 L 0,-0.18 L -0.85,-0.55 Z M 0.6,-0.45 L 0.72,-0.05 L 0.58,-0.05 Z M -0.22,-0.18 C -0.22,0.08 0.22,0.08 0.22,-0.18 Z M -0.65,0.85 C -0.65,0.25 -0.25,0.06 0,0.06 C 0.25,0.06 0.65,0.25 0.65,0.85 Z"
+      },
+      "encoding": {
+        "color": {
+          "field": "category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Onshore International", "Domestic"],
+            "range": ["#ea580c", "#2563eb"]
+          },
+          "legend": {
+            "title": "Student Cohort",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "symbolSize": 180,
+            "offset": 16
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "highlight_cohort",
+            "value": 1.0
+          },
+          "value": 0.35
+        },
+        "stroke": {
+          "condition": {
+            "param": "highlight_cohort",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "transparent"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "highlight_cohort",
+            "empty": false,
+            "value": 0.8
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "category", "type": "nominal", "title": "Student Category"},
+          {"field": "total_students", "type": "quantitative", "title": "Total Enrolments", "format": ",d"},
+          {"field": "percentage", "type": "nominal", "title": "Proportion of Higher Ed"}
+        ]
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}
