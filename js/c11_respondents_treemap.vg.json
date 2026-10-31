@@ -1,0 +1,138 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "title": {
+    "text": "Distribution of International Student Survey Respondents by Study Area (2025)",
+    "subtitle": "Total international sample: 117,362 respondents; tile area corresponds to student population share (%)",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 780,
+  "height": 500,
+  "padding": 5,
+  "data": [
+    {
+      "name": "tree",
+      "url": "data/international_respondents_by_study_area_2025.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "n": "number",
+          "percentage": "number"
+        }
+      },
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "n",
+          "sort": {"field": "value", "order": "descending"},
+          "round": true,
+          "method": "squarify",
+          "ratio": 1.6,
+          "size": [{"signal": "width"}, {"signal": "height"}]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.id != '0' && datum.id != 0"
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "color",
+      "type": "ordinal",
+      "domain": {"data": "tree", "field": "Study_area"},
+      "range": {"scheme": "tableau20"}
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "tree"},
+      "encode": {
+        "enter": {
+          "fill": {"scale": "color", "field": "Study_area"},
+          "stroke": {"value": "#ffffff"},
+          "strokeWidth": {"value": 1.5},
+          "cornerRadius": {"value": 3},
+          "cursor": {"value": "pointer"},
+          "tooltip": {
+            "signal": "{\"Study Area\": datum.Study_area, \"Respondents (n)\": format(datum.n, ',d'), \"Cohort Share\": datum.percentage + '%'}"
+          }
+        },
+        "update": {
+          "x": {"field": "x0"},
+          "y": {"field": "y0"},
+          "x2": {"field": "x1"},
+          "y2": {"field": "y1"},
+          "opacity": {"value": 0.88}
+        },
+        "hover": {
+          "opacity": {"value": 1.0}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "font": {"value": "Inter, system-ui, sans-serif"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "#ffffff"},
+          "fontWeight": {"value": "bold"}
+        },
+        "update": {
+          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
+          "y": {
+            "signal": "0.5 * (datum.y0 + datum.y1) - (datum.y1 - datum.y0 > 50 ? 8 : 0)"
+          },
+          "text": {"field": "Study_area"},
+          "limit": {"signal": "max(0, datum.x1 - datum.x0 - 10)"},
+          "fontSize": {
+            "signal": "clamp((datum.x1 - datum.x0) / 11, 10, 13)"
+          },
+          "opacity": {
+            "signal": "(datum.x1 - datum.x0 > 45 && datum.y1 - datum.y0 > 28) ? 1 : 0"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "tree"},
+      "interactive": false,
+      "encode": {
+        "enter": {
+          "font": {"value": "Inter, system-ui, sans-serif"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "fill": {"value": "#f8fafc"},
+          "fontWeight": {"value": "normal"}
+        },
+        "update": {
+          "x": {"signal": "0.5 * (datum.x0 + datum.x1)"},
+          "y": {"signal": "0.5 * (datum.y0 + datum.y1) + 10"},
+          "text": {
+            "signal": "format(datum.n, ',d') + ' (' + datum.percentage + '%)'"
+          },
+          "limit": {"signal": "max(0, datum.x1 - datum.x0 - 10)"},
+          "fontSize": {"value": 10},
+          "opacity": {
+            "signal": "(datum.x1 - datum.x0 > 70 && datum.y1 - datum.y0 > 50) ? 0.95 : 0"
+          }
+        }
+      }
+    }
+  ]
+}

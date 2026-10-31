@@ -1,0 +1,182 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Shifts in Student Satisfaction Rankings Across Study Areas (2023–2025)",
+    "subtitle": "Bump chart tracking relative ranking of overall satisfaction (% agreement) among international undergraduates",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 700,
+  "height": 620,
+  "data": {
+    "url": "data/international_undergraduate_satisfaction.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "number",
+        "Satisfaction": "number",
+        "Rank": "number"
+      }
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Survey Year",
+      "scale": {"domain": [2022.9, 2025.95]},
+      "axis": {
+        "values": [2023, 2024, 2025],
+        "format": "d",
+        "labelFontSize": 12,
+        "labelFontWeight": "bold",
+        "titleFontSize": 12,
+        "grid": false,
+        "ticks": true
+      }
+    },
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "title": "Satisfaction Rank (1 = Highest Satisfaction)",
+      "scale": {
+        "domain": [1, 21],
+        "reverse": true
+      },
+      "axis": {
+        "tickMinStep": 1,
+        "values": [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21],
+        "labelFontSize": 11,
+        "titleFontSize": 11,
+        "grid": true,
+        "gridColor": "#f1f5f9"
+      }
+    }
+  },
+  "layer": [
+    {
+      "description": "Connecting rank lines with smooth monotone interpolation",
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "detail": {"field": "Study_area", "type": "nominal"},
+        "color": {
+          "field": "Study_area",
+          "type": "nominal",
+          "scale": {"scheme": "tableau20"},
+          "legend": null
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_discipline",
+            "empty": false,
+            "value": 4.0
+          },
+          "value": 2.0
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover_discipline",
+            "empty": false,
+            "value": 1.0
+          },
+          "value": 0.28
+        }
+      }
+    },
+    {
+      "description": "Rank nodes (circles) at each yearly observation",
+      "mark": {
+        "type": "circle",
+        "size": 90,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5,
+        "cursor": "pointer"
+      },
+      "params": [
+        {
+          "name": "hover_discipline",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout",
+            "fields": ["Study_area"]
+          }
+        }
+      ],
+      "encoding": {
+        "color": {
+          "field": "Study_area",
+          "type": "nominal",
+          "scale": {"scheme": "tableau20"}
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover_discipline",
+            "empty": false,
+            "value": 1.0
+          },
+          "value": 0.55
+        },
+        "tooltip": [
+          {"field": "Study_area", "type": "nominal", "title": "Study Area"},
+          {"field": "Year", "type": "quantitative", "title": "Year", "format": "d"},
+          {"field": "Rank", "type": "quantitative", "title": "Rank"},
+          {
+            "field": "Satisfaction",
+            "type": "quantitative",
+            "title": "Overall Satisfaction",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+    {
+      "description": "Direct discipline text labels at 2025",
+      "transform": [
+        {"filter": "datum.Year === 2025"},
+        {
+          "calculate": "datum.Study_area + ' (' + format(datum.Satisfaction, '.1f') + '%)'",
+          "as": "end_label"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 9,
+        "fontSize": 10,
+        "fontWeight": 500,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "text": {"field": "end_label", "type": "nominal"},
+        "color": {
+          "condition": {
+            "param": "hover_discipline",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "#475569"
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover_discipline",
+            "empty": false,
+            "value": 1.0
+          },
+          "value": 0.75
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}

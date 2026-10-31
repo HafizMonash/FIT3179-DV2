@@ -1,0 +1,23 @@
+id,parent,Study_area,n,percentage
+0,,Total,,
+1,0,Business and management,42192,36.0
+2,0,Computing and information systems,18007,15.3
+3,0,Engineering,9127,7.8
+4,0,Teacher education,8472,7.2
+5,0,Science and mathematics,6978,5.9
+6,0,"Humanities, culture and social sciences",5473,4.7
+7,0,Nursing,4528,3.9
+8,0,Communications,3482,3.0
+9,0,Architecture and built environment,3165,2.7
+10,0,Social work,3085,2.6
+11,0,Law and paralegal studies,3008,2.6
+12,0,Health services and support,2958,2.5
+13,0,Creative arts,2327,2.0
+14,0,Agriculture and environmental studies,1204,1.0
+15,0,Psychology,798,0.7
+16,0,Medicine,778,0.7
+17,0,Rehabilitation,612,0.5
+18,0,Pharmacy,550,0.5
+19,0,Veterinary science,248,0.2
+20,0,"Tourism, hospitality, personal services, sport and recreation",215,0.2
+21,0,Dentistry,155,0.1

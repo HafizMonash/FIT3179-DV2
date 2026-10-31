@@ -1,0 +1,194 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Graduate Starting Salaries: International vs. Domestic (Butterfly Chart)",
+    "subtitle": "Median annual full-time salaries ($AUD) across study areas; bars extend left for International and right for Domestic",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 720,
+  "height": 560,
+  "params": [
+    {
+      "name": "selected_year",
+      "value": "2025",
+      "bind": {
+        "input": "radio",
+        "options": ["2025", "2024"],
+        "labels": ["2025 Survey", "2024 Survey"],
+        "name": "Survey Year: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/graduate_salaries_by_cohort.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "string",
+        "Salary_Total": "number",
+        "Salary_Male": "number",
+        "Salary_Female": "number"
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "datum.Year === selected_year && isValid(datum.Salary_Total)"
+    },
+    {
+      "calculate": "datum.Cohort === 'International' ? -datum.Salary_Total : datum.Salary_Total",
+      "as": "signed_salary"
+    },
+    {
+      "calculate": "'$' + format(datum.Salary_Total, ',d')",
+      "as": "formatted_salary"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "Study_area",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "Salary_Total",
+        "op": "max",
+        "order": "descending"
+      },
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 320,
+        "ticks": false,
+        "domain": false
+      },
+      "scale": {"padding": 0.22}
+    }
+  },
+  "layer": [
+    {
+      "description": "Central spine at zero",
+      "mark": {
+        "type": "rule",
+        "color": "#0f172a",
+        "strokeWidth": 1.5
+      },
+      "encoding": {
+        "x": {"datum": 0}
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadius": 2,
+        "cursor": "pointer"
+      },
+      "params": [
+        {
+          "name": "hover_bar",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "encoding": {
+        "x": {
+          "field": "signed_salary",
+          "type": "quantitative",
+          "title": "← International Alumni ($AUD)  |  Domestic Alumni ($AUD) →",
+          "scale": {"domain": [-95000, 95000]},
+          "axis": {
+            "labelExpr": "'$' + round(abs(datum.value) / 1000) + 'k'",
+            "grid": true,
+            "gridColor": "#f1f5f9",
+            "titleFontSize": 11,
+            "labelFontSize": 10.5
+          }
+        },
+        "color": {
+          "field": "Cohort",
+          "type": "nominal",
+          "scale": {
+            "domain": ["International", "Domestic"],
+            "range": ["#ea580c", "#2563eb"]
+          },
+          "legend": {
+            "title": "Graduate Cohort",
+            "orient": "bottom",
+            "direction": "horizontal",
+            "labelFontSize": 12,
+            "titleFontSize": 12,
+            "symbolType": "square",
+            "offset": 14
+          }
+        },
+        "opacity": {
+          "condition": {
+            "param": "hover_bar",
+            "empty": false,
+            "value": 1.0
+          },
+          "value": 0.8
+        },
+        "stroke": {
+          "condition": {
+            "param": "hover_bar",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "transparent"
+        },
+        "strokeWidth": {"value": 1.5},
+        "tooltip": [
+          {"field": "Study_area", "type": "nominal", "title": "Study Area"},
+          {"field": "Cohort", "type": "nominal", "title": "Graduate Cohort"},
+          {"field": "Year", "type": "nominal", "title": "Survey Year"},
+          {
+            "field": "Salary_Total",
+            "type": "quantitative",
+            "title": "Total Median Salary",
+            "format": "$,d"
+          },
+          {
+            "field": "Salary_Male",
+            "type": "quantitative",
+            "title": "Male Median Salary",
+            "format": "$,d"
+          },
+          {
+            "field": "Salary_Female",
+            "type": "quantitative",
+            "title": "Female Median Salary",
+            "format": "$,d"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 9.5,
+        "fontWeight": 600,
+        "fill": "#334155"
+      },
+      "encoding": {
+        "x": {"field": "signed_salary", "type": "quantitative"},
+        "text": {"field": "formatted_salary", "type": "nominal"},
+        "align": {
+          "expr": "datum.Cohort === 'International' ? 'right' : 'left'"
+        },
+        "dx": {
+          "expr": "datum.Cohort === 'International' ? -6 : 6"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}

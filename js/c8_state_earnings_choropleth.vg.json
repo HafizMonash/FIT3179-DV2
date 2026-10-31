@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Median Full-Time Weekly Earnings by State & Territory (August 2025)",
+    "subtitle": "ABS Employee Earnings (Cat. 6337.0); shading indicates median weekly earnings for full-time employees",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 780,
+  "height": 520,
+  "projection": {
+    "type": "equirectangular",
+    "center": [133.5, -28.0],
+    "scale": 850
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/rowanhogan/australian-states/master/states.geojson",
+        "format": {"type": "json", "property": "features"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.STATE_NAME",
+          "from": {
+            "data": {
+              "url": "data/australian_state_earnings_aug2025.csv"
+            },
+            "key": "State_name",
+            "fields": [
+              "State_code",
+              "Full_time_weekly",
+              "Part_time_weekly",
+              "Total_weekly",
+              "Annualised_salary"
+            ]
+          }
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "cursor": "pointer"
+      },
+      "params": [
+        {
+          "name": "hover_state",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout"
+          }
+        }
+      ],
+      "encoding": {
+        "color": {
+          "field": "Full_time_weekly",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "tealblues",
+            "domain": [1550, 1950]
+          },
+          "legend": {
+            "title": "Median Full-Time Earnings ($/wk)",
+            "orient": "bottom-left",
+            "format": "$,d",
+            "gradientLength": 240,
+            "titleFontSize": 11,
+            "labelFontSize": 10.5,
+            "offset": 12
+          }
+        },
+        "stroke": {
+          "condition": {
+            "param": "hover_state",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "#ffffff"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_state",
+            "empty": false,
+            "value": 2.2
+          },
+          "value": 1.0
+        },
+        "tooltip": [
+          {"field": "properties.STATE_NAME", "type": "nominal", "title": "State/Territory"},
+          {"field": "Full_time_weekly", "type": "quantitative", "title": "Full-Time Weekly", "format": "$,.1f"},
+          {"field": "Annualised_salary", "type": "quantitative", "title": "Annualised FT Wage", "format": "$,d"},
+          {"field": "Part_time_weekly", "type": "quantitative", "title": "Part-Time Weekly", "format": "$,.1f"},
+          {"field": "Total_weekly", "type": "quantitative", "title": "Total Median Weekly", "format": "$,.1f"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/australian_state_earnings_aug2025.csv"
+      },
+      "transform": [
+        {
+          "calculate": "datum.State_code + ': $' + format(datum.Full_time_weekly, ',.0f') + '/wk'",
+          "as": "label_text"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "fill": "#0f172a"
+      },
+      "encoding": {
+        "longitude": {"field": "label_lon", "type": "quantitative"},
+        "latitude": {"field": "label_lat", "type": "quantitative"},
+        "text": {"field": "label_text", "type": "nominal"},
+        "dx": {
+          "expr": "datum.State_code === 'ACT' ? 55 : 0"
+        },
+        "dy": {
+          "expr": "datum.State_code === 'ACT' ? 8 : 0"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}

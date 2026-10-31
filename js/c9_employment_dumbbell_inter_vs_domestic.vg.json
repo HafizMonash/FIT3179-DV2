@@ -1,0 +1,205 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Full-Time Employment Gap: Domestic vs. International (Dumbbell Plot)",
+    "subtitle": "Connecting links illustrate the domestic employment advantage (% pts) across study areas 4 months post-graduation",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "anchor": "start",
+    "color": "#1e293b",
+    "subtitleColor": "#64748b"
+  },
+  "width": 700,
+  "height": 580,
+  "params": [
+    {
+      "name": "selected_year",
+      "value": "2025",
+      "bind": {
+        "input": "radio",
+        "options": ["2025", "2024"],
+        "labels": ["2025 Survey", "2024 Survey"],
+        "name": "Survey Year: "
+      }
+    }
+  ],
+  "data": {
+    "url": "data/undergraduate_employment_comparison.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "string",
+        "FTE_International": "number",
+        "FTE_Domestic": "number",
+        "Gap": "number",
+        "OE_International": "number",
+        "OE_Domestic": "number"
+      }
+    }
+  },
+  "transform": [
+    {"filter": "datum.Year === selected_year"},
+    {
+      "calculate": "datum.Gap > 0 ? '+' + format(datum.Gap, '.1f') + '% gap' : format(datum.Gap, '.1f') + '% gap'",
+      "as": "gap_label"
+    }
+  ],
+  "encoding": {
+    "y": {
+      "field": "Study_area",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "Gap",
+        "order": "descending"
+      },
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 340,
+        "ticks": false,
+        "domain": false
+      },
+      "scale": {"padding": 0.3}
+    }
+  },
+  "layer": [
+    {
+      "description": "Connecting grey bar representing the employment disparity",
+      "mark": {
+        "type": "rule",
+        "color": "#cbd5e1",
+        "strokeWidth": 4,
+        "strokeCap": "round"
+      },
+      "encoding": {
+        "x": {
+          "field": "FTE_International",
+          "type": "quantitative",
+          "title": "Full-Time Employment Rate (%)",
+          "scale": {"domain": [25, 100]},
+          "axis": {
+            "format": ".0f",
+            "grid": true,
+            "gridColor": "#f1f5f9",
+            "titleFontSize": 12,
+            "labelFontSize": 11
+          }
+        },
+        "x2": {"field": "FTE_Domestic"}
+      }
+    },
+    {
+      "description": "International Graduate Dot (Orange)",
+      "mark": {
+        "type": "circle",
+        "size": 140,
+        "color": "#ea580c",
+        "opacity": 1,
+        "cursor": "pointer"
+      },
+      "params": [
+        {
+          "name": "hover_dumbbell",
+          "select": {
+            "type": "point",
+            "on": "pointerover",
+            "clear": "pointerout",
+            "fields": ["Study_area"]
+          }
+        }
+      ],
+      "encoding": {
+        "x": {"field": "FTE_International", "type": "quantitative"},
+        "stroke": {
+          "condition": {
+            "param": "hover_dumbbell",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "#ffffff"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_dumbbell",
+            "empty": false,
+            "value": 2
+          },
+          "value": 1.5
+        },
+        "tooltip": [
+          {"field": "Study_area", "type": "nominal", "title": "Study Area"},
+          {"field": "Year", "type": "nominal", "title": "Survey Year"},
+          {"field": "FTE_International", "type": "quantitative", "title": "International FTE", "format": ".1f"},
+          {"field": "FTE_Domestic", "type": "quantitative", "title": "Domestic FTE", "format": ".1f"},
+          {"field": "Gap", "type": "quantitative", "title": "Domestic Advantage (% pts)", "format": "+.1f"},
+          {"field": "OE_International", "type": "quantitative", "title": "International Overall Emp.", "format": ".1f"},
+          {"field": "OE_Domestic", "type": "quantitative", "title": "Domestic Overall Emp.", "format": ".1f"}
+        ]
+      }
+    },
+    {
+      "description": "Domestic Graduate Dot (Blue)",
+      "mark": {
+        "type": "circle",
+        "size": 140,
+        "color": "#2563eb",
+        "opacity": 1,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {"field": "FTE_Domestic", "type": "quantitative"},
+        "stroke": {
+          "condition": {
+            "param": "hover_dumbbell",
+            "empty": false,
+            "value": "#0f172a"
+          },
+          "value": "#ffffff"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_dumbbell",
+            "empty": false,
+            "value": 2
+          },
+          "value": 1.5
+        },
+        "tooltip": [
+          {"field": "Study_area", "type": "nominal", "title": "Study Area"},
+          {"field": "Year", "type": "nominal", "title": "Survey Year"},
+          {"field": "FTE_Domestic", "type": "quantitative", "title": "Domestic FTE", "format": ".1f"},
+          {"field": "FTE_International", "type": "quantitative", "title": "International FTE", "format": ".1f"},
+          {"field": "Gap", "type": "quantitative", "title": "Domestic Advantage (% pts)", "format": "+.1f"}
+        ]
+      }
+    },
+    {
+      "description": "Gap label text to the right of domestic dot",
+      "mark": {
+        "type": "text",
+        "fontSize": 10,
+        "fontWeight": 600,
+        "dx": 10,
+        "align": "left"
+      },
+      "encoding": {
+        "x": {
+          "calculate": "max(datum.FTE_Domestic, datum.FTE_International)",
+          "type": "quantitative"
+        },
+        "text": {"field": "gap_label", "type": "nominal"},
+        "color": {
+          "condition": [
+            {"test": "datum.Gap < 0", "value": "#059669"},
+            {"test": "datum.Gap >= 25", "value": "#b91c1c"}
+          ],
+          "value": "#475569"
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": "transparent"},
+    "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+  }
+}
