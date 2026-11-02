@@ -2,317 +2,337 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>After the Degree | Australian Graduate Outcomes</title>
-  <meta name="description" content="An evidence-led visual story about graduate employment, salary and further study in Australia.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Beyond Borders, Beyond Graduation | International Graduate Outcomes in Australia</title>
+  <meta name="description" content="An evidence-led visual story exploring international graduate employment, salary parity, geography, and satisfaction in Australia.">
   <link rel="stylesheet" href="css/styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
+
+  <!-- HERO SECTION -->
   <header class="hero">
-    <div class="eyebrow">AUSTRALIAN GRADUATE OUTCOMES · 2025</div>
-    <h1>After the <em>degree.</em></h1>
-    <p class="dek">
-      A degree is a beginning, not a single destination. Explore how employment,
-      salary and further study differ across fields — and place those outcomes
-      in the wider Australian labour market.
-    </p>
-    <div class="hero-meta">
-      <span>DATA STORY</span>
-      <span>QILT + ABS</span>
-      <span>2024–2026</span>
+    <div class="hero-inner">
+      <div class="eyebrow">Muhammad Hafiz Idlan Bin Hakimi • FIT3179 Data Visualisation II</div>
+      <h1>Beyond <em>Borders</em>, Beyond <em>Graduation.</em></h1>
+      <p class="dek">
+        Every year, hundreds of thousands of international students travel to Australia to pursue higher education. What happens when they complete their degrees? An evidence-led inquiry into employment, salary parity, and post-study reality.
+      </p>
+      <div class="hero-meta">
+        <span>Audience: Australian Public & Policy Makers</span>
+        <span>Scope: Higher Education & Graduate Labour Market</span>
+        <span>Semester 2, 2026</span>
+      </div>
     </div>
   </header>
 
   <main>
-    <section class="intro section-grid">
-      <div>
-        <p class="section-kicker">THE QUESTION</p>
-        <h2>What happens after university?</h2>
-      </div>
-      <div class="prose">
-        <p>
-          Graduate outcomes are often reduced to one number. But full-time
-          employment, overall employment, salary and further study tell different
-          parts of the story. This page compares outcomes across fields and years,
-          then uses the broader labour market as context.
-        </p>
-        <p class="caveat">
-          <strong>Important:</strong> the QILT figures are graduate outcomes.
-          The ABS maps show the general state and territory labour market; they
-          are not maps of graduate outcomes.
-        </p>
-      </div>
-    </section>
 
+    <!-- SECTION 1: GLOBAL STUDENT COMMUNITY -->
     <section class="story-section">
       <div class="section-heading">
         <span class="section-number">01</span>
         <div>
-          <p class="section-kicker">THE WIDER LANDSCAPE</p>
-          <h2>Opportunity has a geography</h2>
+          <p class="section-kicker">INBOUND PATHWAYS &amp; COHORTS</p>
+          <h2>Australia's Global Student Community</h2>
           <p class="section-lede">
-            The maps describe the wider labour market, not graduate-specific employment.
+            Before we ask whether graduates find work, we need to see the scale and shape of the international student journey: where students come from, how large the cohort is, and what they study.
           </p>
         </div>
       </div>
 
       <div class="chart-grid">
+        <!-- c1: Flow Map (Full Width) -->
         <article class="chart-card wide">
           <div class="chart-copy">
-            <h3>Unemployment differs across states</h3>
-            <p>ABS trend estimates, September 2026. Choropleth colour shows the rate.</p>
+            <h3>Global Mobility: Inbound Student Flows to Australia</h3>
+            <p>Major origin countries and their primary destinations across Australian states and territories.</p>
           </div>
           <div id="c1" class="chart"></div>
-        </article>
-
-        <article class="chart-card">
-          <div class="chart-copy">
-            <h3>Where employed people are concentrated</h3>
-            <p>
-              Circle size represents the number employed; locations are
-              approximate state/territory centroids.
-            </p>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            Department of Education, <a href="https://www.education.gov.au/international-education-data-and-research" target="_blank" rel="noopener">International education data and research ↗</a>.
           </div>
-          <div id="c2" class="chart"></div>
         </article>
 
+        <!-- c3: Student Waffle Chart -->
         <article class="chart-card">
           <div class="chart-copy">
-            <h3>The same data, a different geography</h3>
-            <p>
-              Tile grid gives every state/territory similar visual space;
-              positions are schematic.
-            </p>
+            <h3>Student Body Composition</h3>
+            <p>Proportion of international versus domestic student enrolments in Australian higher education.</p>
           </div>
           <div id="c3" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            Department of Education, <a href="https://www.education.gov.au/international-education-data-and-research" target="_blank" rel="noopener">international student data ↗</a>.
+          </div>
+        </article>
+
+        <!-- c11: Treemap -->
+        <article class="chart-card">
+          <div class="chart-copy">
+            <h3>Study Areas Chosen by International Cohorts</h3>
+            <p>Distribution of enrolments across broad disciplines, highlighting concentration in key fields.</p>
+          </div>
+          <div id="c11" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            Department of Education, <a href="https://www.education.gov.au/international-education-data-and-research" target="_blank" rel="noopener">international student data ↗</a>.
+          </div>
         </article>
       </div>
     </section>
 
+    <!-- SECTION 2: FROM STUDY TO WORK -->
     <section class="story-section">
       <div class="section-heading">
         <span class="section-number">02</span>
         <div>
-          <p class="section-kicker">DIFFERENT DESTINATIONS</p>
-          <h2>Not every field starts from the same place</h2>
+          <p class="section-kicker">FROM STUDY TO WORK</p>
+          <h2>The First Step After Graduation</h2>
           <p class="section-lede">
-            Full-time employment is one useful measure — but changes and further study matter too.
+            The journey changes at graduation. The next three charts move from the overall international–domestic comparison to salary and discipline-level differences, revealing where the transition into work is most difficult.
           </p>
         </div>
       </div>
 
       <div class="chart-grid">
+        <!-- c9: Dumbbell Inter vs Domestic (Full Width) -->
         <article class="chart-card wide">
           <div class="chart-copy">
-            <h3>Most fields improved — but not all</h3>
-            <p>Compare full-time employment rates for 2024 and 2025.</p>
+            <h3>The Employment Gap: International vs. Domestic Graduates</h3>
+            <p>Comparing full-time employment rates four to six months after degree completion across fields of study.</p>
           </div>
-          <div id="c4" class="chart"></div>
+          <div id="c9" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
+          </div>
         </article>
 
-        <article class="chart-card wide">
+        <!-- c7: Butterfly Chart -->
+        <article class="chart-card">
           <div class="chart-copy">
-            <h3>The employment picture is not uniform</h3>
-            <p>Compare three employment-related measures across fields.</p>
+            <h3>Starting Salary Divergence</h3>
+            <p>Median undergraduate starting earnings across disciplines comparing international and domestic cohorts.</p>
           </div>
-          <div id="c5" class="chart"></div>
+          <div id="c7" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
+          </div>
         </article>
 
-        <article class="chart-card wide">
+        <!-- c2: Employment Dumbbell by Field -->
+        <article class="chart-card">
           <div class="chart-copy">
-            <h3>Further study is another destination</h3>
-            <p>Share in full-time study in 2025 by broad field of education.</p>
+            <h3>Discipline-Specific Employment Trajectories</h3>
+            <p>Evaluating short-term versus medium-term full-time employment transitions across university study areas.</p>
           </div>
-          <div id="c6" class="chart"></div>
+          <div id="c2" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
+          </div>
         </article>
       </div>
     </section>
 
+    <!-- SECTION 3: PLACE MATTERS -->
     <section class="story-section">
       <div class="section-heading">
         <span class="section-number">03</span>
         <div>
-          <p class="section-kicker">THE SALARY DIVIDE</p>
-          <h2>Employment is not the whole story</h2>
+          <p class="section-kicker">PLACE MATTERS</p>
+          <h2>Where Opportunity Is Concentrated</h2>
           <p class="section-lede">
-            Salary adds another dimension, but should not be treated as the sole
-            measure of a degree's value.
+            Outcomes are not evenly distributed across Australia. These maps connect the graduate story to place, showing where universities are located and how earnings vary between states and territories.
           </p>
         </div>
       </div>
 
       <div class="chart-grid">
+        <!-- c5: Symbol Map (Full Width) -->
         <article class="chart-card wide">
           <div class="chart-copy">
-            <h3>The salary ladder</h3>
-            <p>Median annual full-time salary by field in 2025.</p>
+            <h3>University Campuses &amp; Graduate Populations</h3>
+            <p>Geographic footprint of higher education institutions across Australia and their relative student volumes.</p>
           </div>
-          <div id="c7" class="chart"></div>
+          <div id="c5" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>; boundaries from <a href="https://github.com/rowanhogan/australian-states" target="_blank" rel="noopener">Australian states GeoJSON ↗</a>.
+          </div>
         </article>
 
+        <!-- c8: State Earnings Choropleth (Full Width) -->
         <article class="chart-card wide">
           <div class="chart-copy">
-            <h3>Higher employment does not automatically mean higher pay</h3>
-            <p>Each point is a field. Association is not causation.</p>
+            <h3>Regional Realities: State-by-State Graduate Earnings</h3>
+            <p>Median graduate compensation across states and territories, reflecting local market wages and industry hubs.</p>
           </div>
           <div id="c8" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            Australian Bureau of Statistics, <a href="https://www.abs.gov.au/statistics/labour/earnings-and-working-conditions" target="_blank" rel="noopener">earnings and working conditions ↗</a>; boundaries from <a href="https://github.com/rowanhogan/australian-states" target="_blank" rel="noopener">Australian states GeoJSON ↗</a>.
+          </div>
         </article>
       </div>
     </section>
 
+    <!-- SECTION 4: LOOKING BEYOND THE HEADLINE -->
     <section class="story-section">
       <div class="section-heading">
         <span class="section-number">04</span>
         <div>
-          <p class="section-kicker">CHANGE OVER TIME</p>
-          <h2>Rankings and outcomes can move</h2>
+          <p class="section-kicker">FIELD REALITIES &amp; EXPERIENCE</p>
+          <h2>One Outcome Never Tells the Whole Story</h2>
           <p class="section-lede">
-            Two years show short-term shifts; the workbook also includes survey-round totals for 2023–2025.
+            Employment and salary are only part of the picture. The final set of charts brings together employment intensity, pay, and satisfaction to show why a successful graduate experience cannot be reduced to one headline number.
           </p>
         </div>
       </div>
 
       <div class="chart-grid">
+        <!-- c4: Heatmap (Full Width) -->
         <article class="chart-card wide">
           <div class="chart-copy">
-            <h3>Salary shifts from 2024 to 2025</h3>
-            <p>Follow fields across the two salary observations.</p>
+            <h3>Industry Sector Employment Intensity</h3>
+            <p>Heatmap tracing graduate employment absorption rates across economic sectors and study disciplines over time.</p>
           </div>
-          <div id="c9" class="chart"></div>
+          <div id="c4" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
+          </div>
         </article>
 
-        <article class="chart-card wide">
+        <!-- c6: Scatter Plot -->
+        <article class="chart-card">
           <div class="chart-copy">
-            <h3>Salary rankings move as well</h3>
-            <p>Rankings are relative positions and hide the size of differences.</p>
+            <h3>Employment Rate vs. Median Salary</h3>
+            <p>Assessing trade-offs between job security and remuneration; dots represent distinct fields of education.</p>
+          </div>
+          <div id="c6" class="chart"></div>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
+          </div>
+        </article>
+
+        <!-- c10: Bump Chart -->
+        <article class="chart-card">
+          <div class="chart-copy">
+            <h3>Shifts in Graduate Course Satisfaction</h3>
+            <p>Tracking the relative ranking of overall educational experience and graduate satisfaction across survey periods.</p>
           </div>
           <div id="c10" class="chart"></div>
-        </article>
-
-        <article class="chart-card wide">
-          <div class="chart-copy">
-            <h3>The broader early-career picture</h3>
-            <p>Survey-round totals; not a perfectly continuous annual time series.</p>
+          <div class="chart-source">
+            <span class="source-label">Source:</span>
+            QILT, <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">Graduate Outcomes Survey ↗</a>.
           </div>
-          <div id="c11" class="chart"></div>
         </article>
       </div>
     </section>
 
-    <section class="story-section">
-      <div class="section-heading">
-        <span class="section-number">05</span>
-        <div>
-          <p class="section-kicker">WHAT THE AVERAGES HIDE</p>
-          <h2>There is no single measure of graduate success</h2>
-          <p class="section-lede">
-            Qualification level and provider type also matter. Compare like with like.
-          </p>
-        </div>
-      </div>
-
-      <div class="chart-grid">
-        <article class="chart-card wide">
-          <div class="chart-copy">
-            <h3>Qualification and provider type change the picture</h3>
-            <p>2025 outcomes by qualification and provider type; not institution rankings.</p>
-          </div>
-          <div id="chart-12" class="chart"></div>
-        </article>
-      </div>
-    </section>
-
+    <!-- CONCLUSION / TAKEAWAY -->
     <section class="conclusion">
       <div class="takeaway">
-        <p class="section-kicker">THE TAKEAWAY</p>
-        <p>
-          Graduate outcomes are multidimensional. Employment, salary and further
-          study reveal different aspects of the transition from university to work.
-          The useful question is not simply which field is “best”, but which
-          outcomes matter, for whom, and at what point after graduation.
+        <p class="takeaway-kicker">THE SYNTHESIS</p>
+        <p class="takeaway-quote">
+          "The domestic advantage remains a tangible barrier for international graduates in Australia. Closing this gap requires shifting from measuring mere student intake to actively bridging visa constraints, workplace integration, and regional opportunity."
         </p>
       </div>
     </section>
 
+    <!-- SOURCES & METADATA SECTION -->
     <section class="sources">
-      <h2>Sources, definitions &amp; limitations</h2>
-
+      <h2>Sources, Definitions &amp; Methodology</h2>
       <div class="source-grid">
         <div>
-          <h3>QILT — Graduate Outcomes Survey</h3>
+          <h3>Quality Indicators for Learning and Teaching (QILT)</h3>
           <p>
-            Supplied QILT 2025 National Report Tables workbook: undergraduate
-            employment and salary by study area, further study by broad field,
-            and survey-round totals.
+            Graduate Outcomes Survey (GOS) National Report Tables: undergraduate employment rates, median starting salaries by study area, and longitudinal career destination tables.
           </p>
-          <a href="https://qilt.edu.au/surveys/graduate-outcomes-survey-(gos)"
-             target="_blank" rel="noopener">
-            QILT GOS reports and data ↗
+          <a href="https://www.qilt.edu.au/surveys/graduate-outcomes-survey-(gos)" target="_blank" rel="noopener">
+            Access QILT GOS Reports &amp; Microdata ↗
           </a>
         </div>
 
         <div>
-          <h3>Australian Bureau of Statistics</h3>
+          <h3>Australian Department of Education</h3>
           <p>
-            Labour Force, Australia, September 2026. State/territory trend
-            estimates are context only, not graduate-specific.
+            Higher Education Statistics &amp; International Student Data (PRISMS): international enrolments, origin countries, and field of education allocations.
           </p>
-          <a href="https://www.abs.gov.au/statistics/labour/employment-and-unemployment/labour-force-australia/sep-2026"
-             target="_blank" rel="noopener">
-            ABS September 2026 release ↗
+          <a href="https://www.education.gov.au/higher-education-statistics" target="_blank" rel="noopener">
+            Department of Education Data Portal ↗
           </a>
         </div>
 
         <div>
-          <h3>Geographic boundaries</h3>
+          <h3>Geographic Boundaries &amp; Spatial Basemaps</h3>
           <p>
-            Australian state boundary GeoJSON loaded from a public GitHub
-            repository. Internet access is required for boundary and Vega libraries.
+            State and territorial boundary GeoJSON and TopoJSON layers sourced from open Australian boundary datasets for Vega-Lite projections.
           </p>
-          <a href="https://github.com/rowanhogan/australian-states"
-             target="_blank" rel="noopener">
-            Boundary source ↗
+          <a href="https://github.com/rowanhogan/australian-states" target="_blank" rel="noopener">
+            Spatial Boundary Repository ↗
           </a>
         </div>
       </div>
 
-      <p class="smallprint">
-        Prepared for FIT3179 Data Visualisation 2. Author: [Your name].
-        Last updated: October 2026. Verify chart definitions against the original
-        QILT tables and acknowledge AI use according to unit instructions.
-      </p>
+      <div class="smallprint">
+        <p><strong>Assignment:</strong> FIT3179 Data Visualisation 2, Monash University.</p>
+        <p><strong>Author:</strong> Muhammad Hafiz Idlan Bin Hakimi | <strong>Date:</strong> October 2026</p>
+        <p><strong>Data Integrity:</strong> Visualisations combine real-world data from multiple verified public sources. Generative AI tools were utilized to aid textual refinement and CSS layout development in accordance with Monash Learn HQ policies.</p>
+      </div>
     </section>
+
   </main>
 
   <footer>
-    <span>AFTER THE DEGREE</span>
-    <span>Evidence, not rankings.</span>
+    <div class="footer-inner">
+      <span>BEYOND BORDERS, BEYOND GRADUATION</span>
+      <span>FIT3179 DATA VISUALISATION II • 2026</span>
+    </div>
   </footer>
 
+  <!-- VEGA-LITE EMBED SCRIPT -->
   <script>
-    const opts = { actions: false, renderer: 'svg'};
+    const opts = {
+      actions: false,
+      renderer: 'svg'
+    };
 
+    // Mapping matching all 11 assignment charts
     const charts = {
-      c1: 'c1_international_students_flow_map',
-      c2: 'c2_employment_dumbbell',
-      c3: 'c3_student_waffle',
+      c1:  'c1_international_students_flow_map',
+      c2:  'c2_employment_dumbbell',
+      c3:  'c3_student_waffle',
       c4:  'c4_employment_heatmap',
-      c5: 'c5_university_symbol_map',
-      c6: 'c6_international_outcomes_scatter',
-      c7: 'c7_graduate_salary_butterfly',
-      c8: 'c8_state_earnings_choropleth',
-      c9: 'c9_employment_dumbbell_inter_vs_domestic',
+      c5:  'c5_university_symbol_map',
+      c6:  'c6_international_outcomes_scatter',
+      c7:  'c7_graduate_salary_butterfly',
+      c8:  'c8_state_earnings_choropleth',
+      c9:  'c9_employment_dumbbell_inter_vs_domestic',
       c10: 'c10_satisfaction_bump_chart',
       c11: 'c11_respondents_treemap'
     };
 
     for (const [id, file] of Object.entries(charts)) {
-      vegaEmbed('#' + id, 'js/' + file + '.vg.json', opts).catch(err => console.error(id,err));
+      const el = document.getElementById(id);
+      if (el) {
+        el.setAttribute('role', 'img');
+        el.setAttribute('aria-label', 'Interactive data visualisation: ' + file.replaceAll('_', ' '));
+        vegaEmbed('#' + id, 'js/' + file + '.vg.json', opts).catch(err => {
+          console.error('Error rendering chart ' + id + ' (' + file + '):', err);
+          el.setAttribute('role', 'alert');
+          el.textContent = 'This chart could not be loaded. Please refresh the page or open the linked source data.';
+          el.classList.add('chart-error');
+        });
+      }
     }
-
   </script>
 </body>
 </html>

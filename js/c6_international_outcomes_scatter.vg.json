@@ -1,15 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Employment Rate vs. Median Starting Salary by Country of Origin (2025)",
-    "subtitle": "Undergraduate international alumni outcomes 4 months post-graduation; dashed lines show cohort medians",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
-  "width": 640,
+  "width": 400,
   "height": 420,
   "data": {
     "url": "data/international_graduate_outcomes_2025.csv",
@@ -24,6 +15,16 @@
       }
     }
   },
+  "transform": [
+    {
+      "calculate": "test(/Hong Kong/i, datum.Country) ? 'hk' : ({'China': 'cn', 'China (excludes SARs and Taiwan)': 'cn', 'India': 'in', 'Nepal': 'np', 'Malaysia': 'my', 'Vietnam': 'vn', 'Viet Nam': 'vn', 'Singapore': 'sg', 'Indonesia': 'id', 'Hong Kong': 'hk', 'Hong Kong (SAR)': 'hk', 'Hong Kong (SAR of China)': 'hk', 'Hong Kong, China': 'hk', 'Sri Lanka': 'lk', 'Philippines': 'ph', 'Pakistan': 'pk', 'Bangladesh': 'bd', 'Thailand': 'th', 'Taiwan': 'tw', 'South Korea': 'kr', 'Korea': 'kr', 'Korea, Republic of': 'kr', 'Japan': 'jp', 'United States': 'us', 'United States of America': 'us', 'USA': 'us', 'United Kingdom': 'gb', 'UK': 'gb', 'Canada': 'ca', 'Germany': 'de', 'France': 'fr', 'Iran': 'ir', 'Iran (Islamic Republic of)': 'ir', 'Saudi Arabia': 'sa', 'Brazil': 'br', 'Colombia': 'co', 'Nigeria': 'ng', 'Kenya': 'ke', 'Myanmar': 'mm'}[datum.Country] || 'un')",
+      "as": "country_code"
+    },
+    {
+      "calculate": "'https://hatscripts.github.io/circle-flags/flags/' + datum.country_code + '.svg'",
+      "as": "circular_flag_url"
+    }
+  ],
   "layer": [
     {
       "description": "Horizontal median salary reference line ($70,000)",
@@ -31,7 +32,7 @@
       "mark": {
         "type": "rule",
         "strokeDash": [4, 4],
-        "stroke": "#94a3b8",
+        "stroke": "#C7D8D1",
         "strokeWidth": 1.2
       },
       "encoding": {
@@ -44,7 +45,7 @@
       "mark": {
         "type": "rule",
         "strokeDash": [4, 4],
-        "stroke": "#94a3b8",
+        "stroke": "#C7D8D1",
         "strokeWidth": 1.2
       },
       "encoding": {
@@ -58,7 +59,7 @@
         "type": "text",
         "fontSize": 10.5,
         "fontStyle": "italic",
-        "fill": "#64748b"
+        "fill": "#367C78"
       },
       "encoding": {
         "x": {"field": "x", "type": "quantitative"},
@@ -67,9 +68,11 @@
       }
     },
     {
+      "description": "Circular flag marks as scatter points",
       "mark": {
-        "type": "circle",
-        "size": 180,
+        "type": "image",
+        "width": 12,
+        "height": 12,
         "cursor": "pointer"
       },
       "params": [
@@ -110,29 +113,14 @@
             "labelFontSize": 11
           }
         },
+        "url": {"field": "circular_flag_url", "type": "nominal"},
         "opacity": {
           "condition": {
             "param": "hover_country",
             "empty": false,
             "value": 1.0
           },
-          "value": 0.8
-        },
-        "stroke": {
-          "condition": {
-            "param": "hover_country",
-            "empty": false,
-            "value": "#0f172a"
-          },
-          "value": "#1e40af"
-        },
-        "strokeWidth": {
-          "condition": {
-            "param": "hover_country",
-            "empty": false,
-            "value": 2.2
-          },
-          "value": 1.2
+          "value": 0.85
         },
         "tooltip": [
           {"field": "Country", "type": "nominal", "title": "Home Country"},
@@ -142,21 +130,6 @@
           {"field": "Labour_force_participation", "type": "quantitative", "title": "Labour Force Participation", "format": ".1f"},
           {"field": "Under_30", "type": "quantitative", "title": "Aged ≤ 30 Years (%)", "format": ".1f"}
         ]
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "dx": 8,
-        "dy": -6,
-        "fontSize": 11,
-        "fontWeight": 600,
-        "fill": "#1e293b"
-      },
-      "encoding": {
-        "x": {"field": "Full_time_employment", "type": "quantitative"},
-        "y": {"field": "Salary", "type": "quantitative"},
-        "text": {"field": "Country", "type": "nominal"}
       }
     }
   ],

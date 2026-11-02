@@ -1,15 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "title": {
-    "text": "Distribution of International Student Survey Respondents by Study Area (2025)",
-    "subtitle": "Total international sample: 117,362 respondents; tile area corresponds to student population share (%)",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
-  "width": 780,
+  "width": 500,
   "height": 500,
   "padding": 5,
   "data": [
@@ -50,7 +41,7 @@
       "name": "color",
       "type": "ordinal",
       "domain": {"data": "tree", "field": "Study_area"},
-      "range": {"scheme": "tableau20"}
+      "range": ["#367C78", "#D98C62", "#172B3A", "#8AA9A2", "#B96F4A", "#5C6B73"]
     }
   ],
   "marks": [

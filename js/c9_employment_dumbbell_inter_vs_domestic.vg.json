@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Full-Time Employment Gap: Domestic vs. International (Dumbbell Plot)",
-    "subtitle": "Connecting links illustrate the domestic employment advantage (% pts) across study areas 4 months post-graduation",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 700,
   "height": 580,
   "params": [
@@ -67,7 +58,7 @@
       "description": "Connecting grey bar representing the employment disparity",
       "mark": {
         "type": "rule",
-        "color": "#cbd5e1",
+        "color": "#C7D8D1",
         "strokeWidth": 4,
         "strokeCap": "round"
       },
@@ -93,7 +84,7 @@
       "mark": {
         "type": "circle",
         "size": 140,
-        "color": "#ea580c",
+        "color": "#D98C62",
         "opacity": 1,
         "cursor": "pointer"
       },
@@ -114,7 +105,7 @@
           "condition": {
             "param": "hover_dumbbell",
             "empty": false,
-            "value": "#0f172a"
+            "value": "#172B3A"
           },
           "value": "#ffffff"
         },
@@ -142,7 +133,7 @@
       "mark": {
         "type": "circle",
         "size": 140,
-        "color": "#2563eb",
+        "color": "#172B3A",
         "opacity": 1,
         "cursor": "pointer"
       },
@@ -152,7 +143,7 @@
           "condition": {
             "param": "hover_dumbbell",
             "empty": false,
-            "value": "#0f172a"
+            "value": "#172B3A"
           },
           "value": "#ffffff"
         },
@@ -190,10 +181,10 @@
         "text": {"field": "gap_label", "type": "nominal"},
         "color": {
           "condition": [
-            {"test": "datum.Gap < 0", "value": "#059669"},
-            {"test": "datum.Gap >= 25", "value": "#b91c1c"}
+            {"test": "datum.Gap < 0", "value": "#367C78"},
+            {"test": "datum.Gap >= 25", "value": "#B96F4A"}
           ],
-          "value": "#475569"
+          "value": "#5C6B73"
         }
       }
     }

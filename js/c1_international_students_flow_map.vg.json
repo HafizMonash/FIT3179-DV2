@@ -1,40 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Global Student Flows to Australia by Continent",
-    "subtitle": "Flow paths categorized by source continent; line thickness represents total enrolments",
-    "fontSize": 18,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 850,
   "height": 480,
   "projection": {
     "type": "equalEarth",
     "rotate": [-150, 0, 0]
   },
-  "params": [
-    {
-      "name": "min_students",
-      "value": 0,
-      "bind": {
-        "input": "range",
-        "min": 0,
-        "max": 100000,
-        "step": 5000,
-        "name": "Min Total Students: "
-      }
-    }
-  ],
   "layer": [
     {
       "data": {"sphere": true},
       "mark": {
         "type": "geoshape",
-        "fill": "#f0f6fc",
-        "stroke": "#cbd5e1",
+        "fill": "#F4F1E9",
+        "stroke": "#C7D8D1",
         "strokeWidth": 0.8
       }
     },
@@ -42,7 +20,7 @@
       "data": {"graticule": true},
       "mark": {
         "type": "geoshape",
-        "stroke": "#e2e8f0",
+        "stroke": "#C7D8D1",
         "strokeWidth": 0.5
       }
     },
@@ -53,7 +31,7 @@
       },
       "mark": {
         "type": "geoshape",
-        "fill": "#e2e8f0",
+        "fill": "#C7D8D1",
         "stroke": "#ffffff",
         "strokeWidth": 0.6
       }
@@ -75,9 +53,6 @@
           }
         }
       },
-      "transform": [
-        {"filter": "datum.Total_students >= min_students"}
-      ],
       "layer": [
         {
           "mark": {
@@ -101,10 +76,10 @@
               "scale": {
                 "domain": ["Asia", "South America", "Europe", "North America", "Africa"],
                 "range": ["#2563eb", "#ea580c", "#059669", "#7c3aed", "#db2777"]
+
               },
               "legend": {
                 "title": "Continent",
-                "orient": "bottom-left",
                 "offset": 8,
                 "symbolType": "stroke"
               }
@@ -155,7 +130,7 @@
               "type": "nominal",
               "scale": {
                 "domain": ["Asia", "South America", "Europe", "North America", "Africa"],
-                "range": ["#2563eb", "#ea580c", "#059669", "#7c3aed", "#db2777"]
+                "range": ["#367C78", "#D98C62", "#172B3A", "#8AA9A2", "#B96F4A"]
               }
             },
             "opacity": {
@@ -182,7 +157,7 @@
             "dy": -13,
             "fontSize": 10.5,
             "fontWeight": "bold",
-            "fill": "#0f172a"
+            "fill": "#172B3A"
           },
           "encoding": {
             "longitude": {"field": "origin_lon", "type": "quantitative"},

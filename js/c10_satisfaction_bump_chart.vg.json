@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Shifts in Student Satisfaction Rankings Across Study Areas (2023–2025)",
-    "subtitle": "Bump chart tracking relative ranking of overall satisfaction (% agreement) among international undergraduates",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 700,
   "height": 620,
   "data": {
@@ -69,7 +60,7 @@
         "color": {
           "field": "Study_area",
           "type": "nominal",
-          "scale": {"scheme": "tableau20"},
+          "scale": {"range": ["#367C78", "#D98C62", "#172B3A", "#8AA9A2", "#B96F4A", "#5C6B73"]},
           "legend": null
         },
         "strokeWidth": {
@@ -114,7 +105,7 @@
         "color": {
           "field": "Study_area",
           "type": "nominal",
-          "scale": {"scheme": "tableau20"}
+          "scale": {"range": ["#367C78", "#D98C62", "#172B3A", "#8AA9A2", "#B96F4A", "#5C6B73"]}
         },
         "opacity": {
           "condition": {
@@ -160,9 +151,9 @@
           "condition": {
             "param": "hover_discipline",
             "empty": false,
-            "value": "#0f172a"
+            "value": "#172B3A"
           },
-          "value": "#475569"
+          "value": "#5C6B73"
         },
         "opacity": {
           "condition": {

@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Undergraduate Full-Time Employment by Study Area (2024–2025)",
-    "subtitle": "Proportion of undergraduates employed full-time 4 months after graduation; sorted by mean employment rate",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 380,
   "height": 560,
   "data": {
@@ -78,9 +69,9 @@
           "field": "Full_time_employment",
           "type": "quantitative",
           "scale": {
-            "scheme": "blues",
+            "range": ["#F4F1E9", "#367C78"],
             "domain": [30, 100],
-            "nullValue": "#f1f5f9"
+            "nullValue": "#C7D8D1"
           },
           "legend": {
             "title": "Full-Time Employed (%)",
@@ -150,7 +141,7 @@
             },
             {
               "test": "datum.Full_time_employment == null",
-              "value": "#94a3b8"
+              "value": "#8AA9A2"
             }
           ],
           "value": "#0f172a"

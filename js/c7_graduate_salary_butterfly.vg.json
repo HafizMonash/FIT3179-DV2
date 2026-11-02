@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Graduate Starting Salaries: International vs. Domestic (Butterfly Chart)",
-    "subtitle": "Median annual full-time salaries ($AUD) across study areas; bars extend left for International and right for Domestic",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 720,
   "height": 560,
   "params": [
@@ -114,7 +105,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["International", "Domestic"],
-            "range": ["#ea580c", "#2563eb"]
+            "range": ["#D98C62", "#172B3A"]
           },
           "legend": {
             "title": "Graduate Cohort",
@@ -173,7 +164,7 @@
         "type": "text",
         "fontSize": 9.5,
         "fontWeight": 600,
-        "fill": "#334155"
+        "fill": "#367C78"
       },
       "encoding": {
         "x": {"field": "signed_salary", "type": "quantitative"},

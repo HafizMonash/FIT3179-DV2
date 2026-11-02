@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Composition of Australia's Higher Education Student Body (2024)",
-    "subtitle": "Each icon represents 1% of the total cohort (~15,686 students). 31% are onshore international enrolments.",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 420,
   "height": 420,
   "data": {
@@ -63,7 +54,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Onshore International", "Domestic"],
-            "range": ["#ea580c", "#2563eb"]
+            "range": ["#D98C62", "#172B3A"]
           },
           "legend": {
             "title": "Student Cohort",

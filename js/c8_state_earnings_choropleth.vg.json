@@ -1,14 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Median Full-Time Weekly Earnings by State & Territory (August 2025)",
-    "subtitle": "ABS Employee Earnings (Cat. 6337.0); shading indicates median weekly earnings for full-time employees",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "anchor": "start",
-    "color": "#1e293b",
-    "subtitleColor": "#64748b"
-  },
   "width": 780,
   "height": 520,
   "projection": {
@@ -59,7 +50,7 @@
           "field": "Full_time_weekly",
           "type": "quantitative",
           "scale": {
-            "scheme": "tealblues",
+            "range": ["#F4F1E9", "#C7D8D1", "#367C78", "#172B3A"],
             "domain": [1550, 1950]
           },
           "legend": {
@@ -111,7 +102,7 @@
         "type": "text",
         "fontSize": 11,
         "fontWeight": "bold",
-        "fill": "#0f172a"
+        "fill": "#172B3A"
       },
       "encoding": {
         "longitude": {"field": "label_lon", "type": "quantitative"},

@@ -1,0 +1,23 @@
+study_level,year,in_aus,overseas,gap
+Undergraduate,2025,51.9,56.3,4.4
+Undergraduate,2024,53.4,52.9,-0.5
+Undergraduate,2023,61.5,58.6,-2.9
+Undergraduate,2022,59.1,60.9,1.8
+Undergraduate,2021,41.6,52.8,11.2
+Undergraduate,2020,39.2,53.0,13.8
+Postgraduate Coursework,2025,52.2,60.2,8.0
+Postgraduate Coursework,2024,55.6,60.1,4.5
+Postgraduate Coursework,2023,60.8,65.0,4.2
+Postgraduate Coursework,2022,58.5,66.1,7.6
+Postgraduate Coursework,2021,41.4,62.0,20.6
+Postgraduate Coursework,2020,39.2,64.2,25.0
+Postgraduate Coursework,2019,43.5,69.7,26.2
+Postgraduate Coursework,2018,46.2,74.5,28.3
+Postgraduate Research,2025,69.2,81.1,11.9
+Postgraduate Research,2024,76.0,83.6,7.6
+Postgraduate Research,2023,75.0,83.2,8.2
+Postgraduate Research,2022,73.9,84.7,10.8
+Postgraduate Research,2021,62.8,82.7,19.9
+Postgraduate Research,2020,68.3,83.9,15.6
+Postgraduate Research,2019,68.1,85.5,17.4
+Postgraduate Research,2018,66.0,86.5,20.5
