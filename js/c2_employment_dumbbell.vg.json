@@ -1,147 +1,153 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 500,
-  "height": 380,
+  "width": 380,
+  "height": 300,
   "data": {
     "url": "data/employment_by_study_level.csv",
     "format": {"type": "csv"}
   },
-  "params": [
-    {
-      "name": "selected_level",
-      "value": "Undergraduate",
-      "bind": {
-        "input": "radio",
-        "options": [
-          "Undergraduate",
-          "Postgraduate Coursework",
-          "Postgraduate Research"
-        ],
-        "name": "Cohort Level: "
-      }
-    }
-  ],
   "transform": [
-    {"filter": "datum.study_level === selected_level"},
     {
       "calculate": "datum.in_aus + (datum.overseas - datum.in_aus) / 2",
       "as": "midpoint"
     },
     {
-      "calculate": "(datum.gap >= 0 ? '+' : '') + format(datum.gap, '.1f') + '% gap'",
+      "calculate": "(datum.gap >= 0 ? '+' : '') + format(datum.gap, '.1f') + ' pts'",
       "as": "gap_label"
     }
   ],
-  "encoding": {
-    "y": {
-      "field": "year",
-      "type": "ordinal",
+  "facet": {
+    "column": {
+      "field": "study_level",
+      "type": "nominal",
       "title": null,
-      "sort": "descending",
-      "axis": {
-        "domain": false,
-        "ticks": false,
-        "labelFontSize": 12,
-        "labelFontWeight": "bold"
+      "sort": [
+        "Undergraduate",
+        "Postgraduate Coursework",
+        "Postgraduate Research"
+      ],
+      "header": {
+        "labelFontSize": 13,
+        "labelFontWeight": "bold",
+        "labelColor": "#172B3A",
+        "labelPadding": 8,
+        "labelOrient": "top",
+        "labelAngle": 0,
+        "labelLimit": 180
       }
     }
   },
-  "layer": [
-    {
-      "description": "Connecting line segment between In Australia and Overseas",
-      "mark": {
-        "type": "rule",
-        "color": "#C7D8D1",
-        "strokeWidth": 4,
-        "strokeCap": "round"
-      },
-      "encoding": {
-        "x": {
-          "field": "in_aus",
-          "type": "quantitative",
-          "title": "Proportion Employed Full-Time (%)",
-          "scale": {"domain": [30, 95]},
-          "axis": {"grid": true, "gridColor": "#f1f5f9", "format": ".0f"}
-        },
-        "x2": {"field": "overseas"}
-      }
-    },
-    {
-      "description": "Points with native color legend",
-      "transform": [
-        {
-          "fold": ["in_aus", "overseas"],
-          "as": ["location_key", "rate"]
-        },
-        {
-          "calculate": "datum.location_key === 'in_aus' ? 'In Australia' : 'Overseas'",
-          "as": "Location"
+  "spec": {
+    "encoding": {
+      "y": {
+        "field": "year",
+        "type": "ordinal",
+        "title": null,
+        "sort": "descending",
+        "axis": {
+          "domain": false,
+          "ticks": false,
+          "labelFontSize": 11,
+          "labelFontWeight": "bold",
+          "title": "Year"
         }
-      ],
-      "mark": {
-        "type": "circle",
-        "size": 130,
-        "opacity": 1,
-        "cursor": "pointer"
-      },
-      "encoding": {
-        "x": {
-          "field": "rate",
-          "type": "quantitative"
+      }
+    },
+    "layer": [
+      {
+        "description": "Connecting line between employment in Australia and overseas",
+        "mark": {
+          "type": "rule",
+          "color": "#C7D8D1",
+          "strokeWidth": 4,
+          "strokeCap": "round"
         },
-        "color": {
-          "field": "Location",
-          "type": "nominal",
-          "scale": {
-            "domain": ["In Australia", "Overseas"],
-            "range": ["#D98C62", "#367C78"]
+        "encoding": {
+          "x": {
+            "field": "in_aus",
+            "type": "quantitative",
+            "title": "Full-time employment (%)",
+            "scale": {"domain": [30, 95]},
+            "axis": {
+              "grid": true,
+              "gridColor": "#F4F1E9",
+              "format": ".0f",
+              "labelFontSize": 10,
+              "titleFontSize": 11
+            }
           },
-          "legend": {
-            "orient": "bottom",
-            "title": null,
-            "labelFontSize": 12,
-            "labelFontWeight": 500,
-            "symbolSize": 110,
-            "offset": 8
-          }
-        },
-        "tooltip": [
-          {"field": "study_level", "title": "Study Level"},
-          {"field": "year", "title": "Survey Year"},
-          {"field": "in_aus", "title": "In Australia (%)", "format": ".1f"},
-          {"field": "overseas", "title": "Overseas (%)", "format": ".1f"},
-          {"field": "gap", "title": "Overseas Advantage (% pts)", "format": ".1f"}
-        ]
-      }
-    },
-    {
-      "description": "Dynamic Gap Annotation for the 2025 cohort",
-      "transform": [{"filter": "datum.year === '2025'"}],
-      "mark": {
-        "type": "text",
-        "dy": -13,
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "color": "#367C78"
-      }
-    },
-    {
-      "description": "Dynamic Gap Annotation for the 2018 cohort (if present)",
-      "transform": [{"filter": "datum.year === '2018'"}],
-      "mark": {
-        "type": "text",
-        "dy": -13,
-        "fontSize": 11,
-        "fontWeight": "bold",
-        "color": "#367C78"
+          "x2": {"field": "overseas"}
+        }
       },
-      "encoding": {
-        "x": {"field": "midpoint", "type": "quantitative"},
-        "text": {"field": "gap_label", "type": "nominal"}
+      {
+        "description": "Australia and overseas employment markers",
+        "transform": [
+          {
+            "fold": ["in_aus", "overseas"],
+            "as": ["location_key", "rate"]
+          },
+          {
+            "calculate": "datum.location_key === 'in_aus' ? 'In Australia' : 'Overseas'",
+            "as": "Location"
+          }
+        ],
+        "mark": {
+          "type": "circle",
+          "size": 115,
+          "opacity": 1,
+          "stroke": "#FFFFFF",
+          "strokeWidth": 1,
+          "cursor": "pointer"
+        },
+        "encoding": {
+          "x": {"field": "rate", "type": "quantitative"},
+          "color": {
+            "field": "Location",
+            "type": "nominal",
+            "scale": {
+              "domain": ["In Australia", "Overseas"],
+              "range": ["#D98C62", "#367C78"]
+            },
+            "legend": {
+              "orient": "bottom",
+              "title": null,
+              "labelFontSize": 11,
+              "symbolSize": 90,
+              "offset": 6
+            }
+          },
+          "tooltip": [
+            {"field": "study_level", "title": "Study Level"},
+            {"field": "year", "title": "Survey Year"},
+            {"field": "in_aus", "title": "In Australia (%)", "format": ".1f"},
+            {"field": "overseas", "title": "Overseas (%)", "format": ".1f"},
+            {"field": "gap", "title": "Overseas Advantage (pts)", "format": "+.1f"}
+          ]
+        }
+      },
+      {
+        "description": "Latest-year gap annotation",
+        "transform": [{"filter": "datum.year === '2025'"}],
+        "mark": {
+          "type": "text",
+          "dy": -12,
+          "fontSize": 10,
+          "fontWeight": "bold",
+          "color": "#367C78"
+        },
+        "encoding": {
+          "x": {"field": "midpoint", "type": "quantitative"},
+          "y": {"field": "year", "type": "ordinal"}
+        }
       }
-    }
-  ],
+    ]
+  },
+  "resolve": {
+    "scale": {"x": "shared", "y": "shared"},
+    "legend": {"color": "shared"}
+  },
   "config": {
+    "facet": {"spacing": 12},
     "view": {"stroke": "transparent"},
     "font": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
   }

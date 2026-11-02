@@ -84,10 +84,12 @@
       "mark": {
         "type": "circle",
         "size": 140,
-        "color": "#D98C62",
         "opacity": 1,
         "cursor": "pointer"
       },
+      "transform": [
+        {"calculate": "'International'", "as": "Cohort"}
+      ],
       "params": [
         {
           "name": "hover_dumbbell",
@@ -101,6 +103,20 @@
       ],
       "encoding": {
         "x": {"field": "FTE_International", "type": "quantitative"},
+        "color": {
+          "field": "Cohort",
+          "type": "nominal",
+          "scale": {
+            "domain": ["International", "Domestic"],
+            "range": ["#D98C62", "#172B3A"]
+          },
+          "legend": {
+            "title": "Graduate cohort",
+            "orient": "top",
+            "symbolType": "circle",
+            "symbolSize": 120
+          }
+        },
         "stroke": {
           "condition": {
             "param": "hover_dumbbell",
@@ -133,12 +149,23 @@
       "mark": {
         "type": "circle",
         "size": 140,
-        "color": "#172B3A",
         "opacity": 1,
         "cursor": "pointer"
       },
+      "transform": [
+        {"calculate": "'Domestic'", "as": "Cohort"}
+      ],
       "encoding": {
         "x": {"field": "FTE_Domestic", "type": "quantitative"},
+        "color": {
+          "field": "Cohort",
+          "type": "nominal",
+          "scale": {
+            "domain": ["International", "Domestic"],
+            "range": ["#D98C62", "#172B3A"]
+          },
+          "legend": null
+        },
         "stroke": {
           "condition": {
             "param": "hover_dumbbell",
