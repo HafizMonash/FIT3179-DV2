@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 700,
+  "width": 300,
   "height": 620,
   "data": {
     "url": "data/international_undergraduate_satisfaction.csv",

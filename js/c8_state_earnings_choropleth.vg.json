@@ -82,9 +82,7 @@
         "tooltip": [
           {"field": "properties.STATE_NAME", "type": "nominal", "title": "State/Territory"},
           {"field": "Full_time_weekly", "type": "quantitative", "title": "Full-Time Weekly", "format": "$,.1f"},
-          {"field": "Annualised_salary", "type": "quantitative", "title": "Annualised FT Wage", "format": "$,d"},
-          {"field": "Part_time_weekly", "type": "quantitative", "title": "Part-Time Weekly", "format": "$,.1f"},
-          {"field": "Total_weekly", "type": "quantitative", "title": "Total Median Weekly", "format": "$,.1f"}
+          {"field": "Annualised_salary", "type": "quantitative", "title": "Annualised FT Wage", "format": "$,d"}
         ]
       }
     },
